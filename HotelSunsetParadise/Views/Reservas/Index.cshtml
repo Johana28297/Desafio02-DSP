@@ -1,0 +1,106 @@
+﻿@model List<HotelSunsetParadise.Models.Reserva>
+@{
+    ViewData["Title"] = "Reservas";
+}
+
+<div class="page-header">
+    <h2 class="page-title">
+        <i class="fas fa-calendar-check"></i>
+        Listado de Reservas
+    </h2>
+    <a asp-action="Create" class="btn-professional">
+        <i class="fas fa-plus"></i>
+        Crear Nueva Reserva
+    </a>
+</div>
+
+<div class="table-container">
+    <table class="table table-professional">
+        <thead>
+            <tr>
+                <th><i class="fas fa-user me-2"></i>Cliente</th>
+                <th><i class="fas fa-bed me-2"></i>Habitación</th>
+                <th><i class="fas fa-calendar-alt me-2"></i>Fecha de Entrada</th>
+                <th><i class="fas fa-calendar-alt me-2"></i>Fecha de Salida</th>
+                <th><i class="fas fa-dollar-sign me-2"></i>Costo Total</th>
+                <th><i class="fas fa-cogs me-2"></i>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var reserva in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@(reserva.Cliente?.Nombre ?? "N/A")</strong>
+                        </td>
+                        <td>
+                            <span class="badge badge-status badge-available">
+                                Habitación @(reserva.Habitacion?.Numero.ToString() ?? "N/A")
+                            </span>
+                        </td>
+                        <td>@reserva.FechaEntrada.ToString("dd/MM/yyyy")</td>
+                        <td>@reserva.FechaSalida.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <strong class="text-gradient">@reserva.CostoTotal.ToString("C")</strong>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="Details" asp-route-id="@reserva.Id" class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@reserva.Id" class="btn btn-sm btn-outline-success" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@reserva.Id" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center py-4">
+                        <i class="fas fa-calendar-times fa-2x text-muted mb-3"></i>
+                        <p class="text-muted mb-0">No hay reservas registradas</p>
+                        <small class="text-muted">Haz clic en "Crear Nueva Reserva" para agregar la primera reserva</small>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Total de Reservas</h5>
+                    <h2 class="text-primary">@Model.Count</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Ingresos Totales</h5>
+                    <h2 class="text-success">@Model.Sum(r => r.CostoTotal).ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Promedio por Reserva</h5>
+                    <h2 class="text-info">@Model.Average(r => r.CostoTotal).ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+}

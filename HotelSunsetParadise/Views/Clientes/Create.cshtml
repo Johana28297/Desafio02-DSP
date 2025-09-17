@@ -1,0 +1,21 @@
+﻿@model HotelSunsetParadise.Models.Cliente
+@{
+    ViewData["Title"] = "Agregar Cliente";
+}
+<h2>Agregar Nuevo Cliente</h2>
+<form asp-action="Create">
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="DUI" class="form-label"></label>
+        <input asp-for="DUI" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Telefono" class="form-label"></label>
+        <input asp-for="Telefono" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

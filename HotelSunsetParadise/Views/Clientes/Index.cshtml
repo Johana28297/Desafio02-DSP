@@ -1,0 +1,106 @@
+﻿@model List<HotelSunsetParadise.Models.Cliente>
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<div class="page-header">
+    <h2 class="page-title">
+        <i class="fas fa-users"></i>
+        Listado de Clientes
+    </h2>
+    <a asp-action="Create" class="btn-professional">
+        <i class="fas fa-user-plus"></i>
+        Agregar Nuevo Cliente
+    </a>
+</div>
+
+<div class="table-container">
+    <table class="table table-professional">
+        <thead>
+            <tr>
+                <th><i class="fas fa-user me-2"></i>Nombre</th>
+                <th><i class="fas fa-id-card me-2"></i>DUI</th>
+                <th><i class="fas fa-phone me-2"></i>Teléfono</th>
+                <th><i class="fas fa-cogs me-2"></i>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var cliente in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-circle me-3">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <strong>@cliente.Nombre</strong>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-status badge-available">
+                                @cliente.DUI
+                            </span>
+                        </td>
+                        <td>
+                            <a href="tel:@cliente.Telefono" class="text-decoration-none">
+                                <i class="fas fa-phone me-1 text-success"></i>
+                                @cliente.Telefono
+                            </a>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="Details" asp-route-id="@cliente.Id" class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@cliente.Id" class="btn btn-sm btn-outline-success" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@cliente.Id" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center py-4">
+                        <i class="fas fa-user-friends fa-2x text-muted mb-3"></i>
+                        <p class="text-muted mb-0">No hay clientes registrados</p>
+                        <small class="text-muted">Haz clic en "Agregar Nuevo Cliente" para agregar el primer cliente</small>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Total de Clientes</h5>
+                    <h2 class="text-primary">@Model.Count</h2>
+                    <small class="text-muted">Clientes registrados en el sistema</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Clientes Activos</h5>
+                    <h2 class="text-success">@Model.Count</h2>
+                    <small class="text-muted">Con información completa</small>
+                </div>
+            </div>
+        </div>
+    </div>
+}

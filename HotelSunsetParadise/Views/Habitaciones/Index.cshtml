@@ -1,0 +1,141 @@
+﻿@model List<HotelSunsetParadise.Models.Habitacion>
+@{
+    ViewData["Title"] = "Habitaciones";
+}
+
+<div class="page-header">
+    <h2 class="page-title">
+        <i class="fas fa-bed"></i>
+        Listado de Habitaciones
+    </h2>
+    <a asp-action="Create" class="btn-professional">
+        <i class="fas fa-plus"></i>
+        Agregar Nueva Habitación
+    </a>
+</div>
+
+<div class="table-container">
+    <table class="table table-professional">
+        <thead>
+            <tr>
+                <th><i class="fas fa-hashtag me-2"></i>Número</th>
+                <th><i class="fas fa-home me-2"></i>Tipo</th>
+                <th><i class="fas fa-dollar-sign me-2"></i>Precio por Noche</th>
+                <th><i class="fas fa-info-circle me-2"></i>Estado</th>
+                <th><i class="fas fa-cogs me-2"></i>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var habitacion in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong class="text-primary">#@habitacion.Numero</strong>
+                        </td>
+                        <td>
+                            <i class="fas @(habitacion.Tipo?.ToLower().Contains("suite") == true ? "fa-crown" :
+                                                                        habitacion.Tipo?.ToLower().Contains("doble") == true ? "fa-users" :
+                                                                        "fa-user") me-2"></i>
+                    @habitacion.Tipo
+                </td>
+                <td>
+                    <strong class="text-gradient">@habitacion.PrecioPorNoche.ToString("C")</strong>
+                </td>
+                <td>
+                    @switch (habitacion.Estado?.ToLower())
+                            {
+                                case "disponible":
+                                    <span class="badge badge-status badge-available">
+                                        <i class="fas fa-check-circle me-1"></i>
+                                        Disponible
+                                    </span>
+                                    break;
+                                case "ocupada":
+                                    <span class="badge badge-status badge-occupied">
+                                        <i class="fas fa-times-circle me-1"></i>
+                                        Ocupada
+                                    </span>
+                                    break;
+                                case "mantenimiento":
+                                    <span class="badge badge-status badge-maintenance">
+                                        <i class="fas fa-tools me-1"></i>
+                                        Mantenimiento
+                                    </span>
+                                    break;
+                                default:
+                                    <span class="badge bg-secondary">
+                                        <i class="fas fa-question-circle me-1"></i>
+                                        @(habitacion.Estado ?? "Sin estado")
+                                    </span>
+                                    break;
+                            }
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="Details" asp-route-id="@habitacion.Id" class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@habitacion.Id" class="btn btn-sm btn-outline-success" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@habitacion.Id" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center py-4">
+                        <i class="fas fa-bed fa-2x text-muted mb-3"></i>
+                        <p class="text-muted mb-0">No hay habitaciones registradas</p>
+                        <small class="text-muted">Haz clic en "Agregar Nueva Habitación" para agregar la primera habitación</small>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Total Habitaciones</h5>
+                    <h2 class="text-primary">@Model.Count</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Disponibles</h5>
+                    <h2 class="text-success">@Model.Count(h => h.Estado?.ToLower() == "disponible")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Ocupadas</h5>
+                    <h2 class="text-danger">@Model.Count(h => h.Estado?.ToLower() == "ocupada")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-custom">
+                <div class="card-body text-center">
+                    <h5 class="text-gradient">Precio Promedio</h5>
+                    <h2 class="text-info">@Model.Average(h => h.PrecioPorNoche).ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+}
