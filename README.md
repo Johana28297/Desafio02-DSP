@@ -46,5 +46,5 @@ Sigue estos pasos para poner el proyecto en funcionamiento:
       * El sistema te redirigirá a la página de login.
       * Usa las credenciales `admin` / `123` 
 
-Alumnas: Yeymi Johana De Paz Fernandez. DF240080
+ 5.  **Alumnas: Yeymi Johana De Paz Fernandez. DF240080
          Geisel Gabriela Castellanos Flores. CF231034
