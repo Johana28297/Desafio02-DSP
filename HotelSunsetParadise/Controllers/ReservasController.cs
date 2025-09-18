@@ -266,3 +266,5 @@ namespace HotelSunsetParadise.Controllers
         }
     }
 }
+
+// Puede mostrar una lista de todas las reservas del hotel con información del cliente y habitación.
