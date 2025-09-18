@@ -2,6 +2,8 @@
 
 ¡Bienvenido al sistema de gestión del Hotel Sunset Paradise! Esta es una aplicación web para la gestión de habitaciones, clientes y reservas de un hotel.
 
+## Enlace del video, funcionalidad: https://youtu.be/xdtJkZ6EBGQ?si=jiyQ9iv5kM49Z_ZM
+
 ## Características 🏨
 
   * **Gestión de Habitaciones**: Registro de habitaciones con número, tipo y precio.
