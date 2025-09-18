@@ -150,3 +150,5 @@ namespace HotelSunsetParadise.Controllers
         }
     }
 }
+
+// Controlador para gestionar los clientes del hotel
