@@ -1,0 +1,139 @@
+﻿@model HotelSunsetParadise.Models.Habitacion
+@{
+    ViewData["Title"] = "Eliminar Habitación";
+}
+
+<div class="page-header">
+    <h2 class="page-title text-danger">
+        <i class="fas fa-exclamation-triangle"></i>
+        Eliminar Habitación
+    </h2>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver al Listado
+    </a>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-custom border-danger">
+            <div class="card-header bg-danger text-white">
+                <i class="fas fa-trash me-2"></i>
+                Confirmar Eliminación
+            </div>
+            <div class="card-body">
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        @TempData["Error"]
+                    </div>
+                }
+
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>¡Atención!</strong> Esta acción no se puede deshacer. Se eliminará permanentemente la siguiente habitación:
+                </div>
+
+                <div class="reservation-summary">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fas fa-hashtag text-primary me-2"></i>
+                                    Número
+                                </label>
+                                <div class="detail-value">
+                                    <span class="badge badge-status badge-available fs-6">
+                                        #@Model.Numero
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fas fa-home text-primary me-2"></i>
+                                    Tipo
+                                </label>
+                                <div class="detail-value">
+                                    @Model.Tipo
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fas fa-dollar-sign text-warning me-2"></i>
+                                    Precio por Noche
+                                </label>
+                                <div class="detail-value text-gradient fw-bold">
+                                    @Model.PrecioPorNoche.ToString("C")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    Estado
+                                </label>
+                                <div class="detail-value">
+                                    @switch (Model.Estado?.ToLower())
+                                    {
+                                        case "disponible":
+                                            <span class="badge badge-status badge-available">
+                                                <i class="fas fa-check-circle me-1"></i>
+                                                Disponible
+                                            </span>
+                                            break;
+                                        case "ocupada":
+                                            <span class="badge badge-status badge-occupied">
+                                                <i class="fas fa-times-circle me-1"></i>
+                                                Ocupada
+                                            </span>
+                                            break;
+                                        case "mantenimiento":
+                                            <span class="badge badge-status badge-maintenance">
+                                                <i class="fas fa-tools me-1"></i>
+                                                Mantenimiento
+                                            </span>
+                                            break;
+                                        default:
+                                            <span class="badge bg-secondary">
+                                                @(Model.Estado ?? "Sin estado")
+                                            </span>
+                                            break;
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="deletion-actions">
+                    @if (TempData["Error"] == null)
+                    {
+                        <form asp-action="Delete" method="post" class="d-inline">
+                            <input type="hidden" asp-for="Id" />
+                            <button type="submit" class="btn btn-danger me-2" onclick="return confirm('¿Está seguro que desea eliminar esta habitación? Esta acción no se puede deshacer.')">
+                                <i class="fas fa-trash me-2"></i>
+                                Sí, Eliminar Habitación
+                            </button>
+                        </form>
+                    }
+                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info me-2">
+                        <i class="fas fa-eye me-2"></i>
+                        Ver Detalles
+                    </a>
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-2"></i>
+                        Cancelar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

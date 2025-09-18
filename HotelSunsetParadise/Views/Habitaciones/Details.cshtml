@@ -1,0 +1,164 @@
+﻿@model HotelSunsetParadise.Models.Habitacion
+@{
+    ViewData["Title"] = "Detalles de Habitación";
+}
+
+<div class="page-header">
+    <h2 class="page-title">
+        <i class="fas fa-bed"></i>
+        Detalles de Habitación
+    </h2>
+    <div class="btn-group">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-professional">
+            <i class="fas fa-edit"></i>
+            Editar
+        </a>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Volver al Listado
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow-custom">
+            <div class="card-header">
+                <i class="fas fa-info-circle me-2"></i>
+                Información de la Habitación
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="detail-item">
+                            <label class="detail-label">
+                                <i class="fas fa-hashtag text-primary me-2"></i>
+                                Número
+                            </label>
+                            <div class="detail-value">
+                                <span class="badge badge-status badge-available fs-5">
+                                    #@Model.Numero
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="detail-item">
+                            <label class="detail-label">
+                                <i class="fas fa-home text-primary me-2"></i>
+                                Tipo de Habitación
+                            </label>
+                            <div class="detail-value">
+                                <i class="fas @(Model.Tipo?.ToLower().Contains("suite") == true ? "fa-crown" :
+                                                                                Model.Tipo?.ToLower().Contains("doble") == true ? "fa-users" :
+                                                                                "fa-user") me-2"></i>
+                                @Model.Tipo
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="detail-item">
+                            <label class="detail-label">
+                                <i class="fas fa-dollar-sign text-warning me-2"></i>
+                                Precio por Noche
+                            </label>
+                            <div class="detail-value text-gradient fs-4 fw-bold">
+                                @Model.PrecioPorNoche.ToString("C")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="detail-item">
+                            <label class="detail-label">
+                                <i class="fas fa-info-circle text-info me-2"></i>
+                                Estado Actual
+                            </label>
+                            <div class="detail-value">
+                                @switch (Model.Estado?.ToLower())
+                                {
+                                    case "disponible":
+                                        <span class="badge badge-status badge-available fs-6">
+                                            <i class="fas fa-check-circle me-1"></i>
+                                            Disponible
+                                        </span>
+                                        break;
+                                    case "ocupada":
+                                        <span class="badge badge-status badge-occupied fs-6">
+                                            <i class="fas fa-times-circle me-1"></i>
+                                            Ocupada
+                                        </span>
+                                        break;
+                                    case "mantenimiento":
+                                        <span class="badge badge-status badge-maintenance fs-6">
+                                            <i class="fas fa-tools me-1"></i>
+                                            Mantenimiento
+                                        </span>
+                                        break;
+                                    default:
+                                        <span class="badge bg-secondary fs-6">
+                                            <i class="fas fa-question-circle me-1"></i>
+                                            @(Model.Estado ?? "Sin estado")
+                                        </span>
+                                        break;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow-custom mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-bar me-2"></i>
+                Información Rápida
+            </div>
+            <div class="card-body text-center">
+                <div class="summary-stat mb-3">
+                    <div class="stat-number text-primary">#@Model.Numero</div>
+                    <div class="stat-label">Número de Habitación</div>
+                </div>
+                <div class="summary-stat mb-3">
+                    <div class="stat-number text-success">@Model.PrecioPorNoche.ToString("C")</div>
+                    <div class="stat-label">Precio por Noche</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="stat-number text-info">@Model.Tipo</div>
+                    <div class="stat-label">Tipo de Habitación</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-custom">
+            <div class="card-header">
+                <i class="fas fa-cogs me-2"></i>
+                Acciones Rápidas
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">
+                        <i class="fas fa-edit me-2"></i>
+                        Editar Habitación
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                        <i class="fas fa-trash me-2"></i>
+                        Eliminar Habitación
+                    </a>
+                    <a asp-controller="Reservas" asp-action="Create" class="btn btn-outline-primary">
+                        <i class="fas fa-calendar-plus me-2"></i>
+                        Crear Reserva
+                    </a>
+                    <a asp-action="Index" class="btn btn-outline-info">
+                        <i class="fas fa-list me-2"></i>
+                        Ver Todas las Habitaciones
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

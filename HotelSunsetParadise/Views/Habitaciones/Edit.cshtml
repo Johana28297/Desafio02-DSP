@@ -1,0 +1,110 @@
+﻿@model HotelSunsetParadise.Models.Habitacion
+@{
+    ViewData["Title"] = "Editar Habitación";
+}
+
+<div class="page-header">
+    <h2 class="page-title">
+        <i class="fas fa-edit"></i>
+        Editar Habitación
+    </h2>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver al Listado
+    </a>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-custom">
+            <div class="card-header">
+                <i class="fas fa-edit me-2"></i>
+                Modificar Información de la Habitación
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <label asp-for="Numero" class="form-label">
+                                    <i class="fas fa-hashtag text-primary me-2"></i>
+                                    Número de Habitación
+                                </label>
+                                <input asp-for="Numero" type="number" class="form-control" placeholder="Ej: 101" min="1" />
+                                <span asp-validation-for="Numero" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <label asp-for="Tipo" class="form-label">
+                                    <i class="fas fa-home text-primary me-2"></i>
+                                    Tipo de Habitación
+                                </label>
+                                <select asp-for="Tipo" class="form-control">
+                                    <option value="">-- Seleccione un tipo --</option>
+                                    <option value="Individual">Individual</option>
+                                    <option value="Doble">Doble</option>
+                                    <option value="Suite">Suite</option>
+                                    <option value="Suite Presidencial">Suite Presidencial</option>
+                                </select>
+                                <span asp-validation-for="Tipo" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <label asp-for="PrecioPorNoche" class="form-label">
+                                    <i class="fas fa-dollar-sign text-warning me-2"></i>
+                                    Precio por Noche
+                                </label>
+                                <input asp-for="PrecioPorNoche" type="number" step="0.01" class="form-control" placeholder="0.00" min="0" />
+                                <span asp-validation-for="PrecioPorNoche" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <label asp-for="Estado" class="form-label">
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    Estado
+                                </label>
+                                <select asp-for="Estado" class="form-control">
+                                    <option value="">-- Seleccione un estado --</option>
+                                    <option value="Disponible">Disponible</option>
+                                    <option value="Ocupada">Ocupada</option>
+                                    <option value="Mantenimiento">Mantenimiento</option>
+                                </select>
+                                <span asp-validation-for="Estado" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-professional">
+                            <i class="fas fa-save me-2"></i>
+                            Guardar Cambios
+                        </button>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info">
+                            <i class="fas fa-eye me-2"></i>
+                            Ver Detalles
+                        </a>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

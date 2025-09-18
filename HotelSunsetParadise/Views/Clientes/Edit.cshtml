@@ -1,0 +1,91 @@
+﻿@model HotelSunsetParadise.Models.Cliente
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<div class="page-header">
+    <h2 class="page-title">
+        <i class="fas fa-edit"></i>
+        Editar Cliente
+    </h2>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver al Listado
+    </a>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-custom">
+            <div class="card-header">
+                <i class="fas fa-edit me-2"></i>
+                Modificar Información del Cliente
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group mb-4">
+                                <label asp-for="Nombre" class="form-label">
+                                    <i class="fas fa-user text-primary me-2"></i>
+                                    Nombre Completo
+                                </label>
+                                <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre completo" />
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <label asp-for="DUI" class="form-label">
+                                    <i class="fas fa-id-card text-primary me-2"></i>
+                                    DUI
+                                </label>
+                                <input asp-for="DUI" class="form-control" placeholder="12345678-9" maxlength="10" />
+                                <small class="form-text text-muted">Formato: 12345678-9</small>
+                                <span asp-validation-for="DUI" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-4">
+                                <label asp-for="Telefono" class="form-label">
+                                    <i class="fas fa-phone text-success me-2"></i>
+                                    Teléfono
+                                </label>
+                                <input asp-for="Telefono" type="tel" class="form-control" placeholder="7890-1234" />
+                                <small class="form-text text-muted">Ejemplo: 7890-1234</small>
+                                <span asp-validation-for="Telefono" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-professional">
+                            <i class="fas fa-save me-2"></i>
+                            Guardar Cambios
+                        </button>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info">
+                            <i class="fas fa-eye me-2"></i>
+                            Ver Detalles
+                        </a>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

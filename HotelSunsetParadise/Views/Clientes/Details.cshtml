@@ -1,0 +1,137 @@
+﻿@model HotelSunsetParadise.Models.Cliente
+@{
+    ViewData["Title"] = "Detalles de Cliente";
+}
+
+<div class="page-header">
+    <h2 class="page-title">
+        <i class="fas fa-user"></i>
+        Detalles del Cliente
+    </h2>
+    <div class="btn-group">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-professional">
+            <i class="fas fa-edit"></i>
+            Editar
+        </a>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Volver al Listado
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow-custom">
+            <div class="card-header">
+                <i class="fas fa-info-circle me-2"></i>
+                Información del Cliente
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="avatar-circle me-4" style="width: 80px; height: 80px; font-size: 32px;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-gradient mb-1">@Model.Nombre</h3>
+                        <p class="text-muted mb-0">Cliente registrado en el sistema</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="detail-item">
+                            <label class="detail-label">
+                                <i class="fas fa-user text-primary me-2"></i>
+                                Nombre Completo
+                            </label>
+                            <div class="detail-value">
+                                @Model.Nombre
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="detail-item">
+                            <label class="detail-label">
+                                <i class="fas fa-id-card text-primary me-2"></i>
+                                DUI
+                            </label>
+                            <div class="detail-value">
+                                <span class="badge badge-status badge-available fs-6">
+                                    @Model.DUI
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <div class="detail-item">
+                            <label class="detail-label">
+                                <i class="fas fa-phone text-success me-2"></i>
+                                Teléfono
+                            </label>
+                            <div class="detail-value">
+                                <a href="tel:@Model.Telefono" class="text-decoration-none">
+                                    <i class="fas fa-phone me-2"></i>
+                                    @Model.Telefono
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow-custom mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-bar me-2"></i>
+                Información Rápida
+            </div>
+            <div class="card-body text-center">
+                <div class="summary-stat mb-3">
+                    <div class="stat-number text-primary">@Model.Nombre</div>
+                    <div class="stat-label">Cliente</div>
+                </div>
+                <div class="summary-stat mb-3">
+                    <div class="stat-number text-success">@Model.DUI</div>
+                    <div class="stat-label">Documento de Identidad</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="stat-number text-info">@Model.Telefono</div>
+                    <div class="stat-label">Contacto</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-custom">
+            <div class="card-header">
+                <i class="fas fa-cogs me-2"></i>
+                Acciones Rápidas
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">
+                        <i class="fas fa-edit me-2"></i>
+                        Editar Cliente
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                        <i class="fas fa-trash me-2"></i>
+                        Eliminar Cliente
+                    </a>
+                    <a asp-controller="Reservas" asp-action="Create" class="btn btn-outline-primary">
+                        <i class="fas fa-calendar-plus me-2"></i>
+                        Crear Reserva
+                    </a>
+                    <a href="tel:@Model.Telefono" class="btn btn-outline-success">
+                        <i class="fas fa-phone me-2"></i>
+                        Llamar Cliente
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
