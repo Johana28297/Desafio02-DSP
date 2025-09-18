@@ -46,7 +46,7 @@ Sigue estos pasos para poner el proyecto en funcionamiento:
       * El sistema te redirigirá a la página de login.
       * Usa las credenciales `admin` / `123` 
 
- 5.  **Alumnas:
+ 5.  ## Alumnas:
     
          Yeymi Johana De Paz Fernandez. DF240080
      
