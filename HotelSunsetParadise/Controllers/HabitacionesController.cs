@@ -155,3 +155,6 @@ namespace HotelSunsetParadise.Controllers
         }
     }
 }
+
+// Sirve para ver la lista completa de todas las habitaciones del hotel. 
+// Ver información detallada de una habitación específica (número, tipo, precio, estado).
